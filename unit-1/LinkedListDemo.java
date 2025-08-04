@@ -1,4 +1,5 @@
 import java.util.LinkedList;
+import java.util.ListIterator;
         
 public class LinkedListDemo {
     public static void main(String [] str){
@@ -35,7 +36,18 @@ public class LinkedListDemo {
         linkedList.remove("Hello");
         System.out.println("After removing 'Hello': " + linkedList);
 
-        
+        // using list iterator
+        System.out.println("Using ListIterator:");
+        ListIterator<String> listItr = linkedList.listIterator();
+        while(listItr.hasNext()) {
+            System.out.println(listItr.next());
+        }   
+
+        // Iteratoring through the LinkedList in reverse direction
+        System.out.println("Using ListIterator in reverse:");
+        while(listItr.hasPrevious()) {
+            System.out.println(listItr.previous());
+        }
 
     }
 }

@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Iterator;
 class ArrayListDemo{
     public static void main(String[] args){
         ArrayList<String> list = new ArrayList<>();
@@ -49,7 +50,7 @@ class ArrayListDemo{
         System.out.println("Size of the ArrayList: " + size);
 
         // Clear the ArrayList
-        list.clear();
+        // list.clear();
 
         System.out.println("ArrayList after clearing: " + list);
         
@@ -70,6 +71,51 @@ class ArrayListDemo{
         for(String str : array) {
             System.out.println(str);
         }   
+
+        // Iterators in ArrayList
+        System.out.println("Using Iterator:");
+        Iterator<String> itr = list.iterator();
+        while(itr.hasNext()) {
+            System.out.println(itr.next());
+        }
         
+        // modify or add elements in my list using for-each loop
+        System.out.println("Modifying elements using for-each loop:");
+        for(String item : list) {
+            if(item.equals("Python")) {
+                System.out.println("Found Python, modifying it.");
+                list.set(list.indexOf(item), "JavaScript");
+            } else {
+                System.out.println("Current item: " + item);
+            }
+        }
+        System.out.println("ArrayList after modification: " + list); 
+        
+        // REMOVE a new element using for-each loop to show concurrent modification exception
+        // Note: This will throw ConcurrentModificationException
+        // System.out.println("Removing elements using for-each loop:");
+        // for(String item : list){
+        //     if(item.equals("JavaScript")) {
+        //         System.out.println("Found JavaScript, removing it.");
+        //         list.remove(item);
+        //     } 
+        //     list.add("Hello Again"); // This will cause ConcurrentModificationException
+        // }
+        // add few elements to the list again
+        list.add("Php");
+        list.add("Ruby");
+
+        // modify the list using an iterator
+        System.out.println("Modifying elements using Iterator:");
+        Iterator<String> iterator = list.iterator();
+        while(iterator.hasNext()) {
+            String current = iterator.next();
+            if(current.equals("JavaScript")) {
+                System.out.println("Found JavaScript, removing it.");
+                iterator.remove(); // Safe removal using iterator
+            } 
+            // iterator.next(); // This will not cause ConcurrentModificationException
+            System.out.println("Current item: " + current);
+        }
     }
 }
